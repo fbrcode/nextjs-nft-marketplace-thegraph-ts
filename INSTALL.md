@@ -1,6 +1,37 @@
-# NextJS NFT Marketplace (Moralis)
+# NextJS NFT Marketplace (The Graph)
 
 This project is the frontend part of a web3 fullstack implementation to buy and sell NFTs.
+
+Instead of reading from **Moralis Server**, we are going to use **The Graph**.
+
+References:
+
+- <https://thegraph.com/en/>
+- <https://thegraph.com/docs/en/>
+
+Instructions:
+
+1. Instead of reading the events from Moralis Server, we...
+   1. Index them with TheGraph
+      1. Go to subgraph studio: <https://thegraph.com/studio/>
+         1. Connect with wallet (signature request from TheGraph means they have sign-ups functionality in the backend - custom sign engine, so TheGraph knows it can interact with us)
+         2. Skip email option
+         3. Create new subgraph
+            1. Pick: Ethereum Rinkeby
+            2. Name: `nft-marketplace`
+            3. continue
+         4. On: <https://thegraph.com/studio/subgraph/nft-marketplace/>
+            1. Check docs: <https://thegraph.com/docs/en/>
+         5. Create new repo: `graph-nft-marketplace-ts`
+            1. From this new repository instructions we generate another repo to avoid `graph` global install
+            2. Generate `graph-subgraph-nft-marketplace` repository with graph sample code
+         6. On `graph-subgraph-nft-marketplace`...
+            1. Adjust graphql schema (entities, etc..)
+            2. Code event handling for all events
+            3. Build and deploy the code (including IPFS)
+         7. Adjust the frontend code to query from TheGraph
+            1. Use graphql + apollo-client to query deployed GraphQL: `yarn add graphql @apollo/client`
+   2. Read from TheGraph
 
 ## Project instructions
 
@@ -10,7 +41,7 @@ This project is the frontend part of a web3 fullstack implementation to buy and 
       2. If not, you can buy the listing ✅
 2. Sell Page:
    1. You can list your NFT in the Marketplace ✅
-   2. Withdraw proceeds
+   2. Withdraw proceeds ✅
 
 ## Init
 
