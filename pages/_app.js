@@ -3,9 +3,15 @@ import { MoralisProvider } from "react-moralis";
 import Header from "../components/Header";
 import Head from "next/head";
 import { NotificationProvider } from "web3uikit";
+import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
-const APP_ID = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
-const SERVER_URL = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
+// source: https://thegraph.com/studio/subgraph/nft-marketplace/
+// source: https://api.studio.thegraph.com/query/32189/nft-marketplace/v0.0.2
+// uri is used as a gateway to the graphql server and query decentralized data
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  uri: "https://api.studio.thegraph.com/query/32189/nft-marketplace/v0.0.2",
+});
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -17,10 +23,12 @@ function MyApp({ Component, pageProps }) {
       </Head>
       {/* connect the application to the Moralis server */}
       <MoralisProvider initializeOnMount={false}>
-        <NotificationProvider>
-          <Header />
-          <Component {...pageProps} />
-        </NotificationProvider>
+        <ApolloProvider client={client}>
+          <NotificationProvider>
+            <Header />
+            <Component {...pageProps} />
+          </NotificationProvider>
+        </ApolloProvider>
       </MoralisProvider>
     </div>
   );
