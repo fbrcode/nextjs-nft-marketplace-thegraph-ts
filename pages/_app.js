@@ -1,8 +1,8 @@
-import '../styles/globals.css';
-import { MoralisProvider } from 'react-moralis';
-import Header from '../components/Header';
-import Head from 'next/head';
-import { NotificationProvider } from 'web3uikit';
+import "../styles/globals.css";
+import { MoralisProvider } from "react-moralis";
+import Header from "../components/Header";
+import Head from "next/head";
+import { NotificationProvider } from "web3uikit";
 
 const APP_ID = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
 const SERVER_URL = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* connect the application to the Moralis server */}
-      <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
+      <MoralisProvider initializeOnMount={false}>
         <NotificationProvider>
           <Header />
           <Component {...pageProps} />
